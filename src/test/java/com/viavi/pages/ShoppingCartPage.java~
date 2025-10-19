@@ -1,0 +1,51 @@
+package com.viavi.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class ShoppingCartPage {
+    private static  WebDriver driver;
+    private final WebDriverWait wait;
+
+    private final By PAGE_TITLE = By.xpath("//h1[contains(text(), 'Shopping Cart')]");
+
+    public ShoppingCartPage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+    public boolean isRegisterPageDisplayed() {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(PAGE_TITLE));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isSelectedPageDisplayed(String selectedProductName) {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(), '" + selectedProductName + "')]")));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void clickOnAddToCart() {
+        WebElement addToCartButton = wait.until(
+                ExpectedConditions.elementToBeClickable(ADD_TO_CART_BUTTON));
+        addToCartButton.click();
+    }
+    public void clickOnProceedToCheckout() {
+        WebElement proceedToCheckoutButton = wait.until(
+                ExpectedConditions.elementToBeClickable(PROCEED_TO_CHECKOUT_BUTTON));
+        proceedToCheckoutButton.click();
+    }
+
+
+}

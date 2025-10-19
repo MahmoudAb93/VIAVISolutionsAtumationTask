@@ -1,0 +1,30 @@
+Feature: Complete PrestaShop Shopping Flow
+  As a new customer
+  I want to register, search for a product, and add it to my cart
+  So that I can complete my shopping experience
+
+  Scenario: Register, Search for Notebook, and Add to Cart
+    Given I open the PrestaShop homepage
+    When I navigate to the login page
+    Then I should verify that I'm in the login page
+
+    When I navigate to the registration page
+    Then I should verify that I'm in the registration page
+    When I register with the following details:
+      | gender    | Mr.                  |
+      | firstName | Mahmoud              |
+      | lastName  | Attia                |
+      | password  | Password@123$        |
+      | birthdate | 05/15/1990           |
+    Then I should see a success message
+
+    When I search for "notebook"
+    Then I should see search results
+
+    When I click on the first search result
+    Then I should verify that I'm in the selected product page
+    And I should verify the product has an image
+
+    When I add the product to the cart
+    And I navigate to the shopping cart
+    Then I should verify the product is added to the cart
